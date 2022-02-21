@@ -1,6 +1,7 @@
 package dev.foltz.crystalgrowing.block;
 
 import dev.foltz.crystalgrowing.CrystalGrowingMod;
+import dev.foltz.crystalgrowing.crystal.CrystalType;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.fluid.Fluid;
@@ -9,10 +10,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.IntProperty;
-import net.minecraft.state.property.Properties;
+import net.minecraft.state.property.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
@@ -21,36 +19,45 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
+import java.util.List;
 import java.util.Random;
 
-public class GrowingCrystalBlock extends Block implements Waterloggable {
+public class BaseCrystalBlock extends Block implements Waterloggable {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final DirectionProperty FACING = Properties.FACING;
-    public static final int GROWTH_MAX = 3;
-    public static final IntProperty GROWTH_STAGE = IntProperty.of("growth_stage", 0, 3);
+    public final IntProperty GROWTH_STAGE;
+    public final CrystalType crystalType;
 
-    public static final VoxelShape BOUNDING_BOX = Block.createCuboidShape(3D, 0D, 3D, 13D, 10D, 13D);
-
-    public GrowingCrystalBlock() {
+    public BaseCrystalBlock(CrystalType crystalType) {
         super(FabricBlockSettings.of(Material.AMETHYST).noCollision().solidBlock((state, world, pos) -> false).nonOpaque());
+        this.crystalType = crystalType;
+        GROWTH_STAGE = crystalType.growthStageProperty;
         setDefaultState(this.getStateManager().getDefaultState()
-            .with(WATERLOGGED, false)
-            .with(FACING, Direction.UP)
-            .with(GROWTH_STAGE, 0)
+                .with(WATERLOGGED, false)
+                .with(FACING, Direction.UP)
+                .with(GROWTH_STAGE, 0)
         );
+    }
+
+    public int numDaysToGrow() {
+        return crystalType.numDaysToGrow;
+    }
+
+    public int numGrowthStages() {
+        return crystalType.numGrowthStages;
+    }
+
+    protected List<Property<?>> dynamicProperties() {
+        return List.of();
     }
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(WATERLOGGED, FACING, GROWTH_STAGE);
+        builder.add(WATERLOGGED, FACING);
+        dynamicProperties().forEach(builder::add);
     }
 
-    @Override
-    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        if (random.nextFloat() > 0.25) {
-            return;
-        }
-
+    public void spawnParticles(World world, BlockPos pos, Random random) {
         double range = 3f;
         double sourceX = pos.getX() + 0.5;
         double sourceY = pos.getY() + 0.5;
@@ -61,6 +68,12 @@ public class GrowingCrystalBlock extends Block implements Waterloggable {
         double x = sourceX + offsetX;
         double y = sourceY + offsetY;
         double z = sourceZ + offsetZ;
+        FluidState fluidState = world.getFluidState(new BlockPos(x, y, z));
+        // Max water-level is 8.
+        if (fluidState.isEmpty() || fluidState.getFluid() != Fluids.WATER || fluidState.getLevel() != 8) {
+            return;
+        }
+
         double deltaX = sourceX - x;
         double deltaY = sourceY - y;
         double deltaZ = sourceZ - z;
@@ -80,13 +93,35 @@ public class GrowingCrystalBlock extends Block implements Waterloggable {
     }
 
     @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (!getFluidState(state).isEmpty() && random.nextFloat() < 0.5f) {
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        if (!canGrow(state)) {
+            return;
+        }
+
+        spawnParticles(world, pos, random);
+    }
+
+    public float chanceToGrowPerRandomTick() {
+        float randomTicksPerDay = 3f / 4096f * 24000f;
+        return numGrowthStages() / (numDaysToGrow() * randomTicksPerDay);
+    }
+
+    public boolean canGrow(BlockState state) {
+        return state.get(WATERLOGGED);
+    }
+
+    public void tryGrow(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        if (canGrow(state) && random.nextFloat() < chanceToGrowPerRandomTick()) {
             int currentGrowth = state.get(GROWTH_STAGE);
-            if (currentGrowth < GROWTH_MAX) {
+            if (currentGrowth < numGrowthStages() - 1) {
                 world.setBlockState(pos, state.with(GROWTH_STAGE, currentGrowth + 1));
             }
         }
+    }
+
+    @Override
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        tryGrow(state, world, pos, random);
     }
 
     @Override
@@ -127,7 +162,9 @@ public class GrowingCrystalBlock extends Block implements Waterloggable {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return super.getOutlineShape(state, world, pos, context);
+        Direction direction = state.get(FACING);
+        int growthStage = state.get(GROWTH_STAGE);
+        return crystalType.getBoundingBox(direction, growthStage);
     }
 
     @Override
@@ -139,7 +176,7 @@ public class GrowingCrystalBlock extends Block implements Waterloggable {
 
     @Override
     public boolean hasRandomTicks(BlockState state) {
-        return state.get(GROWTH_STAGE) < GROWTH_MAX;
+        return state.get(GROWTH_STAGE) < numGrowthStages() - 1;
     }
 
     @Override

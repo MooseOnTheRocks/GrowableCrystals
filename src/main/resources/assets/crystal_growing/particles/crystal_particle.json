@@ -1,10 +1,10 @@
 {
   "textures": [
-    "crystal_growing:crystal_particle0",
-    "crystal_growing:crystal_particle1",
-    "crystal_growing:crystal_particle2",
-    "crystal_growing:crystal_particle3",
-    "crystal_growing:crystal_particle4",
-    "crystal_growing:crystal_particle5"
+    "crystal_growing:crystal_particle_0",
+    "crystal_growing:crystal_particle_1",
+    "crystal_growing:crystal_particle_2",
+    "crystal_growing:crystal_particle_3",
+    "crystal_growing:crystal_particle_4",
+    "crystal_growing:crystal_particle_5"
   ]
 }

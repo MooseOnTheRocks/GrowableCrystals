@@ -1,18 +1,18 @@
 package dev.foltz.crystalgrowing.item;
 
 import dev.foltz.crystalgrowing.CrystalGrowingMod;
+import dev.foltz.crystalgrowing.block.BaseCrystalBlock;
+import dev.foltz.crystalgrowing.block.CrystalBlocks;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.Property;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.collection.DefaultedList;
@@ -20,18 +20,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class SeedCrystalItem extends BlockItem {
     public SeedCrystalItem() {
-        super(CrystalGrowingMod.GROWING_CRYSTAL_BLOCK, new FabricItemSettings().group(ItemGroup.MISC));
+        super(Blocks.AMETHYST_CLUSTER, new FabricItemSettings().group(ItemGroup.MISC));
     }
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        System.out.println("USING!");
         return super.useOnBlock(context);
     }
 
@@ -60,9 +57,13 @@ public class SeedCrystalItem extends BlockItem {
     @Override
     protected BlockState getPlacementState(ItemPlacementContext context) {
         BlockState blockState = context.getWorld().getBlockState(context.getBlockPos().offset(context.getSide().getOpposite()));
-        System.out.println(blockState);
+        System.out.println("getPlacementState: " + blockState);
         if (blockState.isOf(Blocks.REDSTONE_ORE)) {
-            BlockState crystal = CrystalGrowingMod.GROWING_CRYSTAL_BLOCK.getPlacementState(context);
+            BlockState crystal = CrystalBlocks.REDSTONE_CRYSTAL_BLOCK.getPlacementState(context);
+            FluidState fluidState = context.getWorld().getFluidState(context.getBlockPos());
+            if (!fluidState.isEmpty() && fluidState.getFluid() == Fluids.WATER && crystal != null) {
+                crystal.with(BaseCrystalBlock.WATERLOGGED, true);
+            }
             return this.canPlace(context, crystal) ? crystal : null;
         }
         return null;

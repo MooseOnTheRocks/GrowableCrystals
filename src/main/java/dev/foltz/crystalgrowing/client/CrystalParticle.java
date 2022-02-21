@@ -1,18 +1,16 @@
 package dev.foltz.crystalgrowing.client;
 
-import com.ibm.icu.text.MessagePattern;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.particle.DustParticleEffect;
 
 @Environment(EnvType.CLIENT)
-public class CrystalGrowingParticle extends SpriteBillboardParticle {
+public class CrystalParticle extends SpriteBillboardParticle {
     private final SpriteProvider spriteProvider;
 
-    protected CrystalGrowingParticle(ClientWorld clientWorld, double x, double y, double z, SpriteProvider spriteProvider, float r, float g, float b) {
+    protected CrystalParticle(ClientWorld clientWorld, double x, double y, double z, SpriteProvider spriteProvider, float r, float g, float b) {
         super(clientWorld, x, y, z);
         this.spriteProvider = spriteProvider;
         setColor(r, g, b);
@@ -82,7 +80,7 @@ public class CrystalGrowingParticle extends SpriteBillboardParticle {
         }
 
         public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double x, double y, double z, double vx, double vy, double vz) {
-            CrystalGrowingParticle crystalParticle = new CrystalGrowingParticle(clientWorld, x, y, z, spriteProvider, 1f, 0f, 0f);
+            CrystalParticle crystalParticle = new CrystalParticle(clientWorld, x, y, z, spriteProvider, 1f, 0f, 0f);
             crystalParticle.setVelocity(vx, vy, vz);
             return crystalParticle;
         }

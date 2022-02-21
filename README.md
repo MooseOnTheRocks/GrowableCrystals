@@ -21,14 +21,20 @@ Currently in the very early stages of development.
   - Can be placed directionally
   - Can be waterlogged
 
-## Iteration 2 (Current)
+## Iteration 2 (Complete)
 - Crystals grow through different stages, only while waterlogged.
 - Particle effects when growing.
 - Use "seed crystals" to start growing crystals.
   - Crystal type is determined by ore it is placed on
 - Largest stage drops item when broken.
 
-## Iteration 3 (Future)
-- Implement more crystal types.
+## Iteration 3 (Current)
 - Various stages drop differing amounts of loot.
 - Crystals have appropriate bounding box for growth stage and direction.
+- Implement more crystal types.
+  - Redstone, Coal, Iron, Gold, Lapis, Diamond, Emerald
+  - Nether Quartz, (Ancient debris?)
+
+## Iteration 4 (Future)
+- Crystals can grow on multiple block faces
+  - Create blocktype composing crystal faces (look at vines)
