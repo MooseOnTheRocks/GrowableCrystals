@@ -40,7 +40,7 @@ public class BaseCrystalBlock extends Block implements Waterloggable {
         );
     }
 
-    public int numDaysToGrow() {
+    public float numDaysToGrow() {
         return crystalType.numDaysToGrow;
     }
 
@@ -59,7 +59,7 @@ public class BaseCrystalBlock extends Block implements Waterloggable {
     }
 
     public void spawnParticles(World world, BlockPos pos, Random random) {
-        double range = 3f;
+        double range = 4.5f;
         double sourceX = pos.getX() + 0.5;
         double sourceY = pos.getY() + 0.5;
         double sourceZ = pos.getZ() + 0.5;

@@ -17,16 +17,21 @@ public class CrystalTypes {
     );
 
     public static final CrystalType COAL_CRYSTAL_TYPE = createCrystalType(
-        List.of(Blocks.COAL_ORE, Blocks.DEEPSLATE_COAL_ORE), 5, 1, GROWTH_STAGES_5, CrystalGrowingMod.COAL_CRYSTAL_PARTICLE,
+        List.of(Blocks.COAL_ORE, Blocks.DEEPSLATE_COAL_ORE), 5, 1.5f, GROWTH_STAGES_5, CrystalGrowingMod.COAL_CRYSTAL_PARTICLE,
         8, 13, 2, 12
     );
 
     public static final CrystalType IRON_CRYSTAL_TYPE = createCrystalType(
-            List.of(Blocks.IRON_ORE, Blocks.DEEPSLATE_IRON_ORE), 5, 1, GROWTH_STAGES_5, CrystalGrowingMod.IRON_CRYSTAL_PARTICLE,
-            8, 12, 2, 10
+            List.of(Blocks.IRON_ORE, Blocks.DEEPSLATE_IRON_ORE), 5, 3, GROWTH_STAGES_5, CrystalGrowingMod.IRON_CRYSTAL_PARTICLE,
+            8, 12, 2, 9
     );
 
-    public static CrystalType createCrystalType(List<Block> substrates, int growthStages, int daysToGrow, IntProperty growthStagesProperty, ParticleType<?> particleType, int minWidth, int maxWidth, int minHeight, int maxHeight) {
+    public static final CrystalType GOLD_CRYSTAL_TYPE = createCrystalType(
+            List.of(Blocks.GOLD_ORE, Blocks.DEEPSLATE_GOLD_ORE, Blocks.NETHER_GOLD_ORE), 5, 2, GROWTH_STAGES_5, CrystalGrowingMod.GOLD_CRYSTAL_PARTICLE,
+            8, 12, 2, 7
+    );
+
+    public static CrystalType createCrystalType(List<Block> substrates, int growthStages, float daysToGrow, IntProperty growthStagesProperty, ParticleType<?> particleType, int minWidth, int maxWidth, int minHeight, int maxHeight) {
         CrystalType crystalType = new CrystalType(substrates, growthStages, daysToGrow, growthStagesProperty, particleType);
         crystalType.generateBoundingBoxes(minWidth, maxWidth, minHeight, maxHeight);
         return crystalType;

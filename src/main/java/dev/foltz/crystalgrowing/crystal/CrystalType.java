@@ -14,12 +14,12 @@ import java.util.Map;
 public class CrystalType {
     public final List<Block> substrates;
     public final int numGrowthStages;
-    public final int numDaysToGrow;
+    public final float numDaysToGrow;
     public final IntProperty growthStageProperty;
     public final ParticleType<?> particleType;
     private Map<Direction, VoxelShape[]> boundingBoxPerStage;
 
-    public CrystalType(List<Block> substrates, int growthStages, int daysToGrow, IntProperty growthStageProperty, ParticleType<?> particleType) {
+    public CrystalType(List<Block> substrates, int growthStages, float daysToGrow, IntProperty growthStageProperty, ParticleType<?> particleType) {
         this.substrates = substrates;
         this.numGrowthStages = growthStages;
         this.numDaysToGrow = daysToGrow;

@@ -32,9 +32,10 @@ Currently in the very early stages of development.
 - Various stages drop differing amounts of loot.
 - Crystals have appropriate bounding box for growth stage and direction.
 - Implement more crystal types.
-  - Redstone, Coal, Iron, Gold, Lapis, Diamond, Emerald
+  - Redstone, Coal, Iron, Gold, Lapis, Diamond, Copper, Emerald
   - Nether Quartz, (Ancient debris?)
 
 ## Iteration 4 (Future)
 - Crystals can grow on multiple block faces
   - Create blocktype composing crystal faces (look at vines)
+  - Dynamic bounding box rendering and interaction per crystal growth
