@@ -2,6 +2,7 @@ package dev.foltz.crystalgrowing.client;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
@@ -74,13 +75,21 @@ public class CrystalParticle extends SpriteBillboardParticle {
     @Environment(EnvType.CLIENT)
     public static class Factory implements ParticleFactory<DefaultParticleType> {
         private final SpriteProvider spriteProvider;
+        private final float r, g, b;
 
-        public Factory(SpriteProvider spriteProvider) {
+        public Factory(SpriteProvider spriteProvider, float r, float g, float b) {
             this.spriteProvider = spriteProvider;
+            this.r = r;
+            this.g = g;
+            this.b = b;
+        }
+
+        public static ParticleFactoryRegistry.PendingParticleFactory<DefaultParticleType> withColor(float r, float g, float b) {
+            return sp -> new Factory(sp, r, g, b);
         }
 
         public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double x, double y, double z, double vx, double vy, double vz) {
-            CrystalParticle crystalParticle = new CrystalParticle(clientWorld, x, y, z, spriteProvider, 1f, 0f, 0f);
+            CrystalParticle crystalParticle = new CrystalParticle(clientWorld, x, y, z, spriteProvider, r, g, b);
             crystalParticle.setVelocity(vx, vy, vz);
             return crystalParticle;
         }

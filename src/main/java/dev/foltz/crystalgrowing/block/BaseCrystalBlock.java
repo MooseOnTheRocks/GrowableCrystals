@@ -8,6 +8,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.*;
@@ -88,7 +89,7 @@ public class BaseCrystalBlock extends Block implements Waterloggable {
         double velZ = unitZ * speed;
 
         if (!world.getFluidState(new BlockPos(x, y, z)).isEmpty()) {
-            world.addParticle(CrystalGrowingMod.CRYSTAL_PARTICLE, x, y, z, velX, velY, velZ);
+            world.addParticle((DefaultParticleType) crystalType.particleType, x, y, z, velX, velY, velZ);
         }
     }
 

@@ -11,6 +11,8 @@ import java.util.List;
 
 public class CrystalBlocks {
     public static final Block REDSTONE_CRYSTAL_BLOCK = registerCrystalBlock("redstone_crystal", CrystalTypes.REDSTONE_CRYSTAL_TYPE);
+    public static final Block COAL_CRYSTAL_BLOCK = registerCrystalBlock("coal_crystal", CrystalTypes.COAL_CRYSTAL_TYPE);
+    public static final Block IRON_CRYSTAL_BLOCK = registerCrystalBlock("iron_crystal", CrystalTypes.IRON_CRYSTAL_TYPE);
 
     public static BaseCrystalBlock createBlockFromType(CrystalType crystalType) {
         IntProperty growthStages = crystalType.growthStageProperty;
