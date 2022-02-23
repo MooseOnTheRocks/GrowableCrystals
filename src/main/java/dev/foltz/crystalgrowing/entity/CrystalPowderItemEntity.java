@@ -2,6 +2,7 @@ package dev.foltz.crystalgrowing.entity;
 
 import dev.foltz.crystalgrowing.block.BaseCrystalBlock;
 import dev.foltz.crystalgrowing.block.CrystalBlocks;
+import dev.foltz.crystalgrowing.crystal.CrystalType;
 import dev.foltz.crystalgrowing.crystal.CrystalTypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -14,6 +15,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+
+import java.util.Optional;
 
 public class CrystalPowderItemEntity extends ItemEntity {
     public CrystalPowderItemEntity(EntityType<? extends ItemEntity> entityType, World world) {
@@ -53,57 +56,70 @@ public class CrystalPowderItemEntity extends ItemEntity {
             return false;
         }
 
-        if (CrystalTypes.REDSTONE_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
-            BlockState blockState = CrystalBlocks.REDSTONE_CRYSTAL_BLOCK.getDefaultState()
-                .with(BaseCrystalBlock.WATERLOGGED, true)
-                .with(BaseCrystalBlock.FACING, blockFace);
-            world.setBlockState(pos, blockState);
-            return true;
-        }
-        else if (CrystalTypes.COAL_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
-            BlockState blockState = CrystalBlocks.COAL_CRYSTAL_BLOCK.getDefaultState()
-                .with(BaseCrystalBlock.WATERLOGGED, true)
-                .with(BaseCrystalBlock.FACING, blockFace);
-            world.setBlockState(pos, blockState);
-            return true;
-        }
-        else if (CrystalTypes.IRON_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
-            BlockState blockState = CrystalBlocks.IRON_CRYSTAL_BLOCK.getDefaultState()
-                    .with(BaseCrystalBlock.WATERLOGGED, true)
-                    .with(BaseCrystalBlock.FACING, blockFace);
-            world.setBlockState(pos, blockState);
-            return true;
-        }
-        else if (CrystalTypes.GOLD_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
-            BlockState blockState = CrystalBlocks.GOLD_CRYSTAL_BLOCK.getDefaultState()
-                    .with(BaseCrystalBlock.WATERLOGGED, true)
-                    .with(BaseCrystalBlock.FACING, blockFace);
-            world.setBlockState(pos, blockState);
-            return true;
-        }
-        else if (CrystalTypes.LAPIS_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
-            BlockState blockState = CrystalBlocks.LAPIS_CRYSTAL_BLOCK.getDefaultState()
-                    .with(BaseCrystalBlock.WATERLOGGED, true)
-                    .with(BaseCrystalBlock.FACING, blockFace);
-            world.setBlockState(pos, blockState);
-            return true;
-        }
-        else if (CrystalTypes.DIAMOND_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
-            BlockState blockState = CrystalBlocks.DIAMOND_CRYSTAL_BLOCK.getDefaultState()
-                    .with(BaseCrystalBlock.WATERLOGGED, true)
-                    .with(BaseCrystalBlock.FACING, blockFace);
-            world.setBlockState(pos, blockState);
-            return true;
-        }
-        else if (CrystalTypes.COPPER_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
-            BlockState blockState = CrystalBlocks.COPPER_CRYSTAL_BLOCK.getDefaultState()
-                    .with(BaseCrystalBlock.WATERLOGGED, true)
-                    .with(BaseCrystalBlock.FACING, blockFace);
-            world.setBlockState(pos, blockState);
-            return true;
-        }
-        else if (CrystalTypes.EMERALD_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
-            BlockState blockState = CrystalBlocks.EMERALD_CRYSTAL_BLOCK.getDefaultState()
+//        if (CrystalTypes.REDSTONE_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
+//            BlockState blockState = CrystalBlocks.REDSTONE_CRYSTAL_BLOCK.getDefaultState()
+//                .with(BaseCrystalBlock.WATERLOGGED, true)
+//                .with(BaseCrystalBlock.FACING, blockFace);
+//            world.setBlockState(pos, blockState);
+//            return true;
+//        }
+//        else if (CrystalTypes.COAL_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
+//            BlockState blockState = CrystalBlocks.COAL_CRYSTAL_BLOCK.getDefaultState()
+//                .with(BaseCrystalBlock.WATERLOGGED, true)
+//                .with(BaseCrystalBlock.FACING, blockFace);
+//            world.setBlockState(pos, blockState);
+//            return true;
+//        }
+//        else if (CrystalTypes.IRON_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
+//            BlockState blockState = CrystalBlocks.IRON_CRYSTAL_BLOCK.getDefaultState()
+//                    .with(BaseCrystalBlock.WATERLOGGED, true)
+//                    .with(BaseCrystalBlock.FACING, blockFace);
+//            world.setBlockState(pos, blockState);
+//            return true;
+//        }
+//        else if (CrystalTypes.GOLD_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
+//            BlockState blockState = CrystalBlocks.GOLD_CRYSTAL_BLOCK.getDefaultState()
+//                    .with(BaseCrystalBlock.WATERLOGGED, true)
+//                    .with(BaseCrystalBlock.FACING, blockFace);
+//            world.setBlockState(pos, blockState);
+//            return true;
+//        }
+//        else if (CrystalTypes.LAPIS_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
+//            BlockState blockState = CrystalBlocks.LAPIS_CRYSTAL_BLOCK.getDefaultState()
+//                    .with(BaseCrystalBlock.WATERLOGGED, true)
+//                    .with(BaseCrystalBlock.FACING, blockFace);
+//            world.setBlockState(pos, blockState);
+//            return true;
+//        }
+//        else if (CrystalTypes.DIAMOND_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
+//            BlockState blockState = CrystalBlocks.DIAMOND_CRYSTAL_BLOCK.getDefaultState()
+//                    .with(BaseCrystalBlock.WATERLOGGED, true)
+//                    .with(BaseCrystalBlock.FACING, blockFace);
+//            world.setBlockState(pos, blockState);
+//            return true;
+//        }
+//        else if (CrystalTypes.COPPER_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
+//            BlockState blockState = CrystalBlocks.COPPER_CRYSTAL_BLOCK.getDefaultState()
+//                    .with(BaseCrystalBlock.WATERLOGGED, true)
+//                    .with(BaseCrystalBlock.FACING, blockFace);
+//            world.setBlockState(pos, blockState);
+//            return true;
+//        }
+//        else if (CrystalTypes.EMERALD_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
+//            BlockState blockState = CrystalBlocks.EMERALD_CRYSTAL_BLOCK.getDefaultState()
+//                    .with(BaseCrystalBlock.WATERLOGGED, true)
+//                    .with(BaseCrystalBlock.FACING, blockFace);
+//            world.setBlockState(pos, blockState);
+//            return true;
+//        }
+
+        Optional<CrystalType> maybeCrystal = CrystalTypes.ALL_CRYSTAL_TYPES.stream()
+                .filter(crystal -> crystal.substrates.contains(growthBlock))
+                .findFirst();
+
+        if (maybeCrystal.isPresent()) {
+            CrystalType crystalType = maybeCrystal.get();
+            BlockState blockState = crystalType.crystalBlock.getDefaultState()
                     .with(BaseCrystalBlock.WATERLOGGED, true)
                     .with(BaseCrystalBlock.FACING, blockFace);
             world.setBlockState(pos, blockState);

@@ -4,7 +4,9 @@ import dev.foltz.crystalgrowing.CrystalGrowingMod;
 import dev.foltz.crystalgrowing.entity.CrystalPowderItemEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.LightningEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,6 +24,12 @@ public class WorldMixin {
                 return crystalEntity;
             }
         }
+//        else if (entity instanceof LightningEntity lightningEntity) {
+//            System.out.println("Got a lightning bolt: " + lightningEntity);
+//            Vec3d vel = lightningEntity.getVelocity();
+//            BlockPos affectedPos = new BlockPos(vel.x, vel.y - 1.0E-6D, vel.z);
+//            System.out.println("Affected block: " + affectedPos);
+//        }
         return entity;
     }
 }

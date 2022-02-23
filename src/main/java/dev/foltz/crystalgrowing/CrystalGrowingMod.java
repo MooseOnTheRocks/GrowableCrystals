@@ -31,7 +31,7 @@ public class CrystalGrowingMod implements ModInitializer {
 		FabricEntityTypeBuilder.create(
 			SpawnGroup.MISC,
 			CrystalPowderItemEntity::factory
-		).dimensions(EntityDimensions.fixed(0.25F, 0.25F)).trackedUpdateRate(1).trackRangeChunks(6).build()
+		).dimensions(EntityDimensions.fixed(0.25F, 0.25F)).trackedUpdateRate(20).trackRangeChunks(6).build()
 	);
 
 	public static final DefaultParticleType REDSTONE_CRYSTAL_PARTICLE = registerDefaultParticleType("redstone_crystal_particle");

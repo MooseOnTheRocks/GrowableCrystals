@@ -1,5 +1,6 @@
 package dev.foltz.crystalgrowing.crystal;
 
+import dev.foltz.crystalgrowing.block.BaseCrystalBlock;
 import net.minecraft.block.Block;
 import net.minecraft.particle.ParticleType;
 import net.minecraft.state.property.IntProperty;
@@ -18,6 +19,7 @@ public class CrystalType {
     public final IntProperty growthStageProperty;
     public final ParticleType<?> particleType;
     private Map<Direction, VoxelShape[]> boundingBoxPerStage;
+    public BaseCrystalBlock crystalBlock;
 
     public CrystalType(List<Block> substrates, int growthStages, float daysToGrow, IntProperty growthStageProperty, ParticleType<?> particleType) {
         this.substrates = substrates;
