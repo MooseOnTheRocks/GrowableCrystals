@@ -46,6 +46,11 @@ public class CrystalTypes {
             8, 14, 2, 9
     );
 
+    public static final CrystalType EMERALD_CRYSTAL_TYPE = createCrystalType(
+            List.of(Blocks.EMERALD_ORE, Blocks.DEEPSLATE_EMERALD_ORE, Blocks.EMERALD_BLOCK), 5, 3.5f, GROWTH_STAGES_5, CrystalGrowingMod.EMERALD_CRYSTAL_PARTICLE,
+            8, 13, 2, 10
+    );
+
     public static CrystalType createCrystalType(List<Block> substrates, int growthStages, float daysToGrow, IntProperty growthStagesProperty, ParticleType<?> particleType, int minWidth, int maxWidth, int minHeight, int maxHeight) {
         CrystalType crystalType = new CrystalType(substrates, growthStages, daysToGrow, growthStagesProperty, particleType);
         crystalType.generateBoundingBoxes(minWidth, maxWidth, minHeight, maxHeight);
