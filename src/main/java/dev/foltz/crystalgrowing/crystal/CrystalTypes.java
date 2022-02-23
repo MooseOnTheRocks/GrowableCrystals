@@ -41,6 +41,11 @@ public class CrystalTypes {
             8, 13, 2, 7
     );
 
+    public static final CrystalType COPPER_CRYSTAL_TYPE = createCrystalType(
+            List.of(Blocks.COPPER_ORE, Blocks.DEEPSLATE_COPPER_ORE, Blocks.COPPER_BLOCK, Blocks.EXPOSED_COPPER, Blocks.WEATHERED_COPPER, Blocks.OXIDIZED_COPPER, Blocks.RAW_COPPER_BLOCK), 5, 2f, GROWTH_STAGES_5, CrystalGrowingMod.COPPER_CRYSTAL_PARTICLE,
+            8, 14, 2, 9
+    );
+
     public static CrystalType createCrystalType(List<Block> substrates, int growthStages, float daysToGrow, IntProperty growthStagesProperty, ParticleType<?> particleType, int minWidth, int maxWidth, int minHeight, int maxHeight) {
         CrystalType crystalType = new CrystalType(substrates, growthStages, daysToGrow, growthStagesProperty, particleType);
         crystalType.generateBoundingBoxes(minWidth, maxWidth, minHeight, maxHeight);

@@ -95,6 +95,13 @@ public class CrystalPowderItemEntity extends ItemEntity {
             world.setBlockState(pos, blockState);
             return true;
         }
+        else if (CrystalTypes.COPPER_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
+            BlockState blockState = CrystalBlocks.COPPER_CRYSTAL_BLOCK.getDefaultState()
+                    .with(BaseCrystalBlock.WATERLOGGED, true)
+                    .with(BaseCrystalBlock.FACING, blockFace);
+            world.setBlockState(pos, blockState);
+            return true;
+        }
 
         return false;
     }
