@@ -4,13 +4,13 @@
   "version": "${version}",
 
   "name": "Crystal Growing",
-  "description": "Grow your own crystals in Minecraft!",
+  "description": "Growable crystals in Minecraft!",
   "authors": [
     "MooseOnTheRocks"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/MooseOnTheRocks/crystal_growing_mod",
+    "sources": "https://github.com/MooseOnTheRocks/crystal_growing_mod"
   },
 
   "license": "MIT",

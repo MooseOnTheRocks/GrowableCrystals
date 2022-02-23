@@ -54,7 +54,9 @@ public class CrystalPowderItemEntity extends ItemEntity {
 
     protected boolean canWalkThrough(BlockState blockState) {
         FluidState fluidState = blockState.getFluidState();
-        return blockState.getBlock() == Blocks.WATER && fluidState.getFluid() == Fluids.WATER && fluidState.isStill();
+        Block block = blockState.getBlock();
+        return CrystalBlocks.ALL_CRYSTAL_BLOCKS.contains(block) ||
+                (block == Blocks.WATER && fluidState.getFluid() == Fluids.WATER && fluidState.isStill());
     }
 
     protected BlockPos randomWalkPos(int maxDist) {
@@ -71,13 +73,14 @@ public class CrystalPowderItemEntity extends ItemEntity {
     }
 
     protected boolean attemptGrowOnBlock() {
-        int dist = 6;
-        BlockPos pos = randomWalkPos(dist);
+        int maxDist = 16;
+        BlockPos pos = randomWalkPos(random.nextInt(maxDist));
         Direction blockFace = randomDirection();
         BlockPos substratePos = pos.offset(blockFace);
         Block substrate = world.getBlockState(substratePos).getBlock();
-
-        if (!canWalkThrough(world.getBlockState(pos))) {
+        Block block = world.getBlockState(pos).getBlock();
+        FluidState fluidState = world.getFluidState(pos);
+        if (!(block == Blocks.WATER && fluidState.getFluid() == Fluids.WATER && fluidState.isStill())) {
             return false;
         }
 

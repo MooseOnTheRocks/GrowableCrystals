@@ -3,12 +3,17 @@ package dev.foltz.crystalgrowing.block;
 import dev.foltz.crystalgrowing.CrystalGrowingMod;
 import dev.foltz.crystalgrowing.crystal.CrystalType;
 import dev.foltz.crystalgrowing.crystal.CrystalTypes;
+import net.minecraft.block.Block;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Property;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CrystalBlocks {
+    public static final Set<Block> ALL_CRYSTAL_BLOCKS = new HashSet<>();
+
     public static final BaseCrystalBlock REDSTONE_CRYSTAL_BLOCK = registerCrystalBlock("redstone_crystal", CrystalTypes.REDSTONE_CRYSTAL_TYPE);
     public static final BaseCrystalBlock COAL_CRYSTAL_BLOCK = registerCrystalBlock("coal_crystal", CrystalTypes.COAL_CRYSTAL_TYPE);
     public static final BaseCrystalBlock IRON_CRYSTAL_BLOCK = registerCrystalBlock("iron_crystal", CrystalTypes.IRON_CRYSTAL_TYPE);
@@ -28,6 +33,7 @@ public class CrystalBlocks {
         };
         crystalBlock.generateBoundingBoxes(crystalType.minWidth, crystalType.maxWidth, crystalType.minHeight, crystalType.maxHeight);
         crystalType.crystalBlock = crystalBlock;
+        ALL_CRYSTAL_BLOCKS.add(crystalBlock);
         return crystalBlock;
     }
 
