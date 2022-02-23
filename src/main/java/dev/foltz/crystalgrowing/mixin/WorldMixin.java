@@ -20,7 +20,7 @@ public class WorldMixin {
             if (itemEntity.getStack().getItem() == CrystalGrowingMod.CRYSTAL_POWDER_ITEM && !(entity instanceof CrystalPowderItemEntity)) {
                 Vec3d vel = entity.getVelocity();
                 ItemEntity crystalEntity = new CrystalPowderItemEntity(entity.world, entity.getX(), entity.getY(), entity.getZ(), itemEntity.getStack(), vel.x, vel.y, vel.z);
-                crystalEntity.setPickupDelay(20);
+                crystalEntity.setPickupDelay(45);
                 return crystalEntity;
             }
         }

@@ -10,6 +10,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -33,88 +34,55 @@ public class CrystalPowderItemEntity extends ItemEntity {
     @Override
     public void tick() {
         super.tick();
-        if (isTouchingWater() && attemptGrowOnBlock()) {
-            this.getStack().setCount(this.getStack().getCount() - 1);
+        if (!isTouchingWater()) {
+            return;
         }
+
+        int growths = 0;
+        int count = this.getStack().getCount();
+        for (int i = 0; i < count; i++) {
+            if (random.nextFloat() < 0.1 && attemptGrowOnBlock()) {
+                growths += 1;
+            }
+        }
+        this.getStack().setCount(count - growths);
+    }
+
+    protected Direction randomDirection() {
+        return Direction.values()[world.random.nextInt(Direction.values().length)];
+    }
+
+    protected boolean canWalkThrough(BlockState blockState) {
+        FluidState fluidState = blockState.getFluidState();
+        return blockState.getBlock() == Blocks.WATER && fluidState.getFluid() == Fluids.WATER && fluidState.isStill();
+    }
+
+    protected BlockPos randomWalkPos(int maxDist) {
+        BlockPos pos = getBlockPos();
+        for (int i = 0; i < maxDist; i++) {
+            Direction dir = randomDirection();
+            BlockPos wanted = pos.offset(dir);
+            BlockState blockState = world.getBlockState(wanted);
+            if (canWalkThrough(blockState)) {
+                pos = wanted;
+            }
+        }
+        return pos;
     }
 
     protected boolean attemptGrowOnBlock() {
-        int half = 6;
-        double ox = half - 2 * half * random.nextDouble();
-        double oy = half - 2 * half * random.nextDouble();
-        double oz = half - 2 * half * random.nextDouble();
-        double x = getX() + ox;
-        double y = getY() + oy;
-        double z = getZ() + oz;
-        Direction blockFace = Direction.values()[random.nextInt(Direction.values().length)].getOpposite();
-        BlockPos pos = new BlockPos(x, y, z);
-        BlockPos growthPos = pos.offset(blockFace);
-        Fluid fluid = world.getFluidState(pos).getFluid();
-        Block growthBlock = world.getBlockState(growthPos).getBlock();
-        boolean waterlogged = fluid == Fluids.WATER && world.getFluidState(pos).isStill() && world.getBlockState(pos).getBlock() == Blocks.WATER;
-        if (!waterlogged) {
+        int dist = 6;
+        BlockPos pos = randomWalkPos(dist);
+        Direction blockFace = randomDirection();
+        BlockPos substratePos = pos.offset(blockFace);
+        Block substrate = world.getBlockState(substratePos).getBlock();
+
+        if (!canWalkThrough(world.getBlockState(pos))) {
             return false;
         }
 
-//        if (CrystalTypes.REDSTONE_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
-//            BlockState blockState = CrystalBlocks.REDSTONE_CRYSTAL_BLOCK.getDefaultState()
-//                .with(BaseCrystalBlock.WATERLOGGED, true)
-//                .with(BaseCrystalBlock.FACING, blockFace);
-//            world.setBlockState(pos, blockState);
-//            return true;
-//        }
-//        else if (CrystalTypes.COAL_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
-//            BlockState blockState = CrystalBlocks.COAL_CRYSTAL_BLOCK.getDefaultState()
-//                .with(BaseCrystalBlock.WATERLOGGED, true)
-//                .with(BaseCrystalBlock.FACING, blockFace);
-//            world.setBlockState(pos, blockState);
-//            return true;
-//        }
-//        else if (CrystalTypes.IRON_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
-//            BlockState blockState = CrystalBlocks.IRON_CRYSTAL_BLOCK.getDefaultState()
-//                    .with(BaseCrystalBlock.WATERLOGGED, true)
-//                    .with(BaseCrystalBlock.FACING, blockFace);
-//            world.setBlockState(pos, blockState);
-//            return true;
-//        }
-//        else if (CrystalTypes.GOLD_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
-//            BlockState blockState = CrystalBlocks.GOLD_CRYSTAL_BLOCK.getDefaultState()
-//                    .with(BaseCrystalBlock.WATERLOGGED, true)
-//                    .with(BaseCrystalBlock.FACING, blockFace);
-//            world.setBlockState(pos, blockState);
-//            return true;
-//        }
-//        else if (CrystalTypes.LAPIS_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
-//            BlockState blockState = CrystalBlocks.LAPIS_CRYSTAL_BLOCK.getDefaultState()
-//                    .with(BaseCrystalBlock.WATERLOGGED, true)
-//                    .with(BaseCrystalBlock.FACING, blockFace);
-//            world.setBlockState(pos, blockState);
-//            return true;
-//        }
-//        else if (CrystalTypes.DIAMOND_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
-//            BlockState blockState = CrystalBlocks.DIAMOND_CRYSTAL_BLOCK.getDefaultState()
-//                    .with(BaseCrystalBlock.WATERLOGGED, true)
-//                    .with(BaseCrystalBlock.FACING, blockFace);
-//            world.setBlockState(pos, blockState);
-//            return true;
-//        }
-//        else if (CrystalTypes.COPPER_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
-//            BlockState blockState = CrystalBlocks.COPPER_CRYSTAL_BLOCK.getDefaultState()
-//                    .with(BaseCrystalBlock.WATERLOGGED, true)
-//                    .with(BaseCrystalBlock.FACING, blockFace);
-//            world.setBlockState(pos, blockState);
-//            return true;
-//        }
-//        else if (CrystalTypes.EMERALD_CRYSTAL_TYPE.substrates.contains(growthBlock)) {
-//            BlockState blockState = CrystalBlocks.EMERALD_CRYSTAL_BLOCK.getDefaultState()
-//                    .with(BaseCrystalBlock.WATERLOGGED, true)
-//                    .with(BaseCrystalBlock.FACING, blockFace);
-//            world.setBlockState(pos, blockState);
-//            return true;
-//        }
-
         Optional<CrystalType> maybeCrystal = CrystalTypes.ALL_CRYSTAL_TYPES.stream()
-                .filter(crystal -> crystal.substrates.contains(growthBlock))
+                .filter(crystal -> crystal.substrates.contains(substrate))
                 .findFirst();
 
         if (maybeCrystal.isPresent()) {

@@ -66,8 +66,7 @@ public class CrystalTypes {
     );
 
     public static CrystalType createCrystalType(List<Block> substrates, int growthStages, float daysToGrow, IntProperty growthStagesProperty, ParticleType<?> particleType, int minWidth, int maxWidth, int minHeight, int maxHeight) {
-        CrystalType crystalType = new CrystalType(substrates, growthStages, daysToGrow, growthStagesProperty, particleType);
-        crystalType.generateBoundingBoxes(minWidth, maxWidth, minHeight, maxHeight);
+        CrystalType crystalType = new CrystalType(substrates, growthStages, daysToGrow, growthStagesProperty, particleType, minWidth, maxWidth, minHeight, maxHeight);
         ALL_CRYSTAL_TYPES.add(crystalType);
         return crystalType;
     }

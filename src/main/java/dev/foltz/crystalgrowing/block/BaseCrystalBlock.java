@@ -14,13 +14,16 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class BaseCrystalBlock extends Block implements Waterloggable {
@@ -28,6 +31,7 @@ public class BaseCrystalBlock extends Block implements Waterloggable {
     public static final DirectionProperty FACING = Properties.FACING;
     public final IntProperty GROWTH_STAGE;
     public final CrystalType crystalType;
+    public Map<Direction, VoxelShape[]> boundingBoxPerStage;
 
     public BaseCrystalBlock(CrystalType crystalType) {
         super(FabricBlockSettings.of(Material.AMETHYST).noCollision().solidBlock((state, world, pos) -> false).nonOpaque());
@@ -38,6 +42,33 @@ public class BaseCrystalBlock extends Block implements Waterloggable {
                 .with(FACING, Direction.UP)
                 .with(GROWTH_STAGE, 0)
         );
+    }
+
+    public void generateBoundingBoxes(int minWidth, int maxWidth, int minHeight, int maxHeight) {
+        boundingBoxPerStage = new HashMap<>();
+        boundingBoxPerStage.put(Direction.UP, new VoxelShape[numGrowthStages()]);
+        boundingBoxPerStage.put(Direction.DOWN, new VoxelShape[numGrowthStages()]);
+        boundingBoxPerStage.put(Direction.NORTH, new VoxelShape[numGrowthStages()]);
+        boundingBoxPerStage.put(Direction.EAST, new VoxelShape[numGrowthStages()]);
+        boundingBoxPerStage.put(Direction.SOUTH, new VoxelShape[numGrowthStages()]);
+        boundingBoxPerStage.put(Direction.WEST, new VoxelShape[numGrowthStages()]);
+
+        for (int i = 0; i < numGrowthStages(); i++) {
+            double p = (double) i / (double) (numGrowthStages() - 1);
+            double width = MathHelper.lerp(p, minWidth, maxWidth);
+            double height = MathHelper.lerp(p, minHeight, maxHeight);
+            double dw = (16 - width) / 2;
+            boundingBoxPerStage.get(Direction.UP)[i] = Block.createCuboidShape(dw, 16 - height, dw, 16 - dw, 16, 16 - dw);
+            boundingBoxPerStage.get(Direction.DOWN)[i] = Block.createCuboidShape(dw, 0, dw, 16 - dw, height, 16 - dw);
+            boundingBoxPerStage.get(Direction.NORTH)[i] = Block.createCuboidShape(dw, dw, 0, 16 - dw, 16 - dw, height);
+            boundingBoxPerStage.get(Direction.EAST)[i] = Block.createCuboidShape(16 - height, dw, dw, 16, 16 - dw, 16 - dw);
+            boundingBoxPerStage.get(Direction.SOUTH)[i] = Block.createCuboidShape(dw, dw, 16 - height, 16 - dw, 16 - dw, 16);
+            boundingBoxPerStage.get(Direction.WEST)[i] = Block.createCuboidShape(0, dw, dw, height, 16 - dw, 16 - dw);
+        }
+    }
+
+    public VoxelShape getBoundingBox(Direction direction, int growthStage) {
+        return boundingBoxPerStage.get(direction)[growthStage];
     }
 
     public float numDaysToGrow() {
@@ -165,7 +196,7 @@ public class BaseCrystalBlock extends Block implements Waterloggable {
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         Direction direction = state.get(FACING);
         int growthStage = state.get(GROWTH_STAGE);
-        return crystalType.getBoundingBox(direction, growthStage);
+        return getBoundingBox(direction, growthStage);
     }
 
     @Override

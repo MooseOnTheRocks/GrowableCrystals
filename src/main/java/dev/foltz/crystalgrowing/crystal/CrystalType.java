@@ -18,41 +18,19 @@ public class CrystalType {
     public final float numDaysToGrow;
     public final IntProperty growthStageProperty;
     public final ParticleType<?> particleType;
-    private Map<Direction, VoxelShape[]> boundingBoxPerStage;
     public BaseCrystalBlock crystalBlock;
+    public final int minWidth, maxWidth;
+    public final int minHeight, maxHeight;
 
-    public CrystalType(List<Block> substrates, int growthStages, float daysToGrow, IntProperty growthStageProperty, ParticleType<?> particleType) {
+    public CrystalType(List<Block> substrates, int growthStages, float daysToGrow, IntProperty growthStageProperty, ParticleType<?> particleType, int minWidth, int maxWidth, int minHeight, int maxHeight) {
         this.substrates = substrates;
         this.numGrowthStages = growthStages;
         this.numDaysToGrow = daysToGrow;
         this.growthStageProperty = growthStageProperty;
         this.particleType = particleType;
-    }
-
-    public void generateBoundingBoxes(int minWidth, int maxWidth, int minHeight, int maxHeight) {
-        boundingBoxPerStage = new HashMap<>();
-        boundingBoxPerStage.put(Direction.UP, new VoxelShape[numGrowthStages]);
-        boundingBoxPerStage.put(Direction.DOWN, new VoxelShape[numGrowthStages]);
-        boundingBoxPerStage.put(Direction.NORTH, new VoxelShape[numGrowthStages]);
-        boundingBoxPerStage.put(Direction.EAST, new VoxelShape[numGrowthStages]);
-        boundingBoxPerStage.put(Direction.SOUTH, new VoxelShape[numGrowthStages]);
-        boundingBoxPerStage.put(Direction.WEST, new VoxelShape[numGrowthStages]);
-
-        for (int i = 0; i < numGrowthStages; i++) {
-            double p = (double) i / (double) (numGrowthStages - 1);
-            double width = MathHelper.lerp(p, minWidth, maxWidth);
-            double height = MathHelper.lerp(p, minHeight, maxHeight);
-            double dw = (16 - width) / 2;
-            boundingBoxPerStage.get(Direction.UP)[i] = Block.createCuboidShape(dw, 16 - height, dw, 16 - dw, 16, 16 - dw);
-            boundingBoxPerStage.get(Direction.DOWN)[i] = Block.createCuboidShape(dw, 0, dw, 16 - dw, height, 16 - dw);
-            boundingBoxPerStage.get(Direction.NORTH)[i] = Block.createCuboidShape(dw, dw, 0, 16 - dw, 16 - dw, height);
-            boundingBoxPerStage.get(Direction.EAST)[i] = Block.createCuboidShape(16 - height, dw, dw, 16, 16 - dw, 16 - dw);
-            boundingBoxPerStage.get(Direction.SOUTH)[i] = Block.createCuboidShape(dw, dw, 16 - height, 16 - dw, 16 - dw, 16);
-            boundingBoxPerStage.get(Direction.WEST)[i] = Block.createCuboidShape(0, dw, dw, height, 16 - dw, 16 - dw);
-        }
-    }
-
-    public VoxelShape getBoundingBox(Direction direction, int growthStage) {
-        return boundingBoxPerStage.get(direction)[growthStage];
+        this.minWidth = minWidth;
+        this.maxWidth = maxWidth;
+        this.minHeight = minHeight;
+        this.maxHeight = maxHeight;
     }
 }

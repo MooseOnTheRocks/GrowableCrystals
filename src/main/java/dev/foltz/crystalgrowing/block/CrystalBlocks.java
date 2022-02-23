@@ -26,6 +26,7 @@ public class CrystalBlocks {
                 return List.of(growthStages);
             }
         };
+        crystalBlock.generateBoundingBoxes(crystalType.minWidth, crystalType.maxWidth, crystalType.minHeight, crystalType.maxHeight);
         crystalType.crystalBlock = crystalBlock;
         return crystalBlock;
     }
