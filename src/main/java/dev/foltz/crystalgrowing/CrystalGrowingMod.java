@@ -39,8 +39,9 @@ public class CrystalGrowingMod implements ModInitializer {
 	public static final DefaultParticleType IRON_CRYSTAL_PARTICLE = registerDefaultParticleType("iron_crystal_particle");
 	public static final DefaultParticleType GOLD_CRYSTAL_PARTICLE = registerDefaultParticleType("gold_crystal_particle");
 	public static final DefaultParticleType LAPIS_CRYSTAL_PARTICLE = registerDefaultParticleType("lapis_crystal_particle");
-//	public static final DefaultParticleType DIAMOND_CRYSTAL_PARTICLE = registerDefaultParticleType("diamond_crystal_particle");
+	public static final DefaultParticleType DIAMOND_CRYSTAL_PARTICLE = registerDefaultParticleType("diamond_crystal_particle");
 //	public static final DefaultParticleType EMERALD_CRYSTAL_PARTICLE = registerDefaultParticleType("emerald_crystal_particle");
+//	public static final DefaultParticleType COPPER_CRYSTAL_PARTICLE = registerDefaultParticleType("copper_crystal_particle");
 
 	@Override
 	public void onInitialize() {

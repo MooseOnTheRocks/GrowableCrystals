@@ -33,12 +33,14 @@ public class CrystalGrowingModClient implements ClientModInitializer {
         putBlockInRenderLayer(CrystalBlocks.IRON_CRYSTAL_BLOCK, RenderLayer.getCutout());
         putBlockInRenderLayer(CrystalBlocks.GOLD_CRYSTAL_BLOCK, RenderLayer.getCutout());
         putBlockInRenderLayer(CrystalBlocks.LAPIS_CRYSTAL_BLOCK, RenderLayer.getCutout());
+        putBlockInRenderLayer(CrystalBlocks.DIAMOND_CRYSTAL_BLOCK, RenderLayer.getCutout());
 
         registerParticle(CrystalGrowingMod.REDSTONE_CRYSTAL_PARTICLE, CrystalParticle.Factory.withColor(1f, 0f, 0f));
         registerParticle(CrystalGrowingMod.COAL_CRYSTAL_PARTICLE, CrystalParticle.Factory.withColor(0.2f, 0.2f, 0.2f));
         registerParticle(CrystalGrowingMod.IRON_CRYSTAL_PARTICLE, CrystalParticle.Factory.withColor(0.85f, 0.70f, 0.60f));
         registerParticle(CrystalGrowingMod.GOLD_CRYSTAL_PARTICLE, CrystalParticle.Factory.withColor(1f, 0.9f, 0.2f));
         registerParticle(CrystalGrowingMod.LAPIS_CRYSTAL_PARTICLE, CrystalParticle.Factory.withColor(0.3f, 0.5f, 0.95f));
+        registerParticle(CrystalGrowingMod.DIAMOND_CRYSTAL_PARTICLE, CrystalParticle.Factory.withColor(0.55f, 0.95f, 0.92f));
     }
 
     public static <T extends ParticleEffect> void registerParticle(ParticleType<T> particleType, ParticleFactoryRegistry.PendingParticleFactory<T> particleFactory) {

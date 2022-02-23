@@ -15,6 +15,7 @@ public class CrystalBlocks {
     public static final Block IRON_CRYSTAL_BLOCK = registerCrystalBlock("iron_crystal", CrystalTypes.IRON_CRYSTAL_TYPE);
     public static final Block GOLD_CRYSTAL_BLOCK = registerCrystalBlock("gold_crystal", CrystalTypes.GOLD_CRYSTAL_TYPE);
     public static final Block LAPIS_CRYSTAL_BLOCK = registerCrystalBlock("lapis_crystal", CrystalTypes.LAPIS_CRYSTAL_TYPE);
+    public static final Block DIAMOND_CRYSTAL_BLOCK = registerCrystalBlock("diamond_crystal", CrystalTypes.DIAMOND_CRYSTAL_TYPE);
 
     public static BaseCrystalBlock createBlockFromType(CrystalType crystalType) {
         IntProperty growthStages = crystalType.growthStageProperty;

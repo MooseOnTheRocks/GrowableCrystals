@@ -36,6 +36,11 @@ public class CrystalTypes {
             8, 14, 2, 8
     );
 
+    public static final CrystalType DIAMOND_CRYSTAL_TYPE = createCrystalType(
+            List.of(Blocks.DIAMOND_ORE, Blocks.DEEPSLATE_DIAMOND_ORE, Blocks.DIAMOND_BLOCK), 5, 5f, GROWTH_STAGES_5, CrystalGrowingMod.DIAMOND_CRYSTAL_PARTICLE,
+            8, 13, 2, 7
+    );
+
     public static CrystalType createCrystalType(List<Block> substrates, int growthStages, float daysToGrow, IntProperty growthStagesProperty, ParticleType<?> particleType, int minWidth, int maxWidth, int minHeight, int maxHeight) {
         CrystalType crystalType = new CrystalType(substrates, growthStages, daysToGrow, growthStagesProperty, particleType);
         crystalType.generateBoundingBoxes(minWidth, maxWidth, minHeight, maxHeight);
