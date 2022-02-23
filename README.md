@@ -31,6 +31,7 @@ Currently in the very early stages of development.
 ## Iteration 3 (Current)
 - Various stages drop differing amounts of loot.
 - Crystals have appropriate bounding box for growth stage and direction.
+- Crystals grow from crystal powder item entity
 - Implement more crystal types.
   - Redstone, Coal, Iron, Gold, Lapis, Diamond, Copper, Emerald
   - Nether Quartz, (Ancient debris?)
