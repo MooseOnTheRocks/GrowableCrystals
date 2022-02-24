@@ -73,7 +73,7 @@ public class CrystalPowderItemEntity extends ItemEntity {
     }
 
     protected boolean attemptGrowOnBlock() {
-        int maxDist = 16;
+        int maxDist = 24;
         BlockPos pos = randomWalkPos(random.nextInt(maxDist));
         Direction blockFace = randomDirection();
         BlockPos substratePos = pos.offset(blockFace);
