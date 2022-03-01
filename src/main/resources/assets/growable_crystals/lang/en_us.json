@@ -1,3 +1,10 @@
 {
-  "item.growable_crystals.crystal_powder": "Crystal Powder"
+  "item.growable_crystals.crystal_powder": "Crystal Powder",
+  "item.growable_crystals.coal_fragment": "Coal Fragment",
+  "item.growable_crystals.diamond_fragment": "Diamond Fragment",
+  "item.growable_crystals.lapis_fragment": "Lapis Lazuli Fragment",
+  "item.growable_crystals.emerald_fragment": "Emerald Fragment",
+  "item.growable_crystals.raw_iron_nugget": "Raw Iron Nugget",
+  "item.growable_crystals.raw_gold_nugget": "Raw Gold Nugget",
+  "item.growable_crystals.raw_copper_nugget": "Raw Copper Nugget"
 }

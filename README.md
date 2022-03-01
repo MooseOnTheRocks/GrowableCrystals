@@ -38,11 +38,10 @@ Currently in the very early stages of development.
 - Use random walk to determine crystal placement from item entity
   - Instead of random x,y,z offset from position (can clip through walls)
 - Implement a way for players to obtain crystal powder.
-  - Player must use lightning to strike a block
+- Add small/crushed crystal drops for corresponding material.
 
 ## Exploration
 - Crystals can grow on multiple block faces
   - Create blocktype composing crystal faces (look at vines)
   - Dynamic bounding box rendering and interaction per crystal growth?
 - Crystal powder item entity spawns particles, which in turn spawn crystals on blocks.
-- 

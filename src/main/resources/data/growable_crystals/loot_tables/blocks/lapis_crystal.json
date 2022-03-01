@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:lapis_lazuli"
+          "name": "growable_crystals:lapis_fragment"
         }
       ],
       "conditions": [
@@ -24,7 +24,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:lapis_lazuli",
+          "name": "growable_crystals:lapis_fragment",
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -52,7 +52,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:lapis_lazuli",
+          "name": "growable_crystals:lapis_fragment",
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -80,7 +80,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:lapis_lazuli",
+          "name": "growable_crystals:lapis_fragment",
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -108,7 +108,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:lapis_lazuli",
+          "name": "growable_crystals:lapis_fragment",
           "functions": [
             {
               "function": "minecraft:set_count",

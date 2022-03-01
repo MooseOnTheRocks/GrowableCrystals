@@ -3,6 +3,9 @@ package dev.foltz.growablecrystals;
 import dev.foltz.growablecrystals.entity.CrystalPowderItemEntity;
 import dev.foltz.growablecrystals.item.CrystalPowderItem;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.event.registry.ItemConstructedCallback;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.block.Block;
@@ -10,6 +13,8 @@ import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.Items;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -21,6 +26,13 @@ public class GrowableCrystalsMod implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
 
 	public static final Item CRYSTAL_POWDER_ITEM = registerItem("crystal_powder", new CrystalPowderItem());
+	public static final Item COAL_FRAGMENT_ITEM = registerItem("coal_fragment", new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+	public static final Item DIAMOND_FRAGMENT_ITEM = registerItem("diamond_fragment", new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+	public static final Item EMERALD_FRAGMENT_ITEM = registerItem("emerald_fragment", new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+	public static final Item LAPIS_FRAGMENT_ITEM = registerItem("lapis_fragment", new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+	public static final Item RAW_COPPER_NUGGET_ITEM = registerItem("raw_copper_nugget", new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+	public static final Item RAW_IRON_NUGGET_ITEM = registerItem("raw_iron_nugget", new Item(new FabricItemSettings().group(ItemGroup.MISC)));
+	public static final Item RAW_GOLD_NUGGET_ITEM = registerItem("raw_gold_nugget", new Item(new FabricItemSettings().group(ItemGroup.MISC)));
 
 	public static final EntityType<CrystalPowderItemEntity> CRYSTAL_POWDER_ENTITY_TYPE = Registry.register(
 		Registry.ENTITY_TYPE,

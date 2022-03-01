@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:emerald"
+          "name": "growable_crystals:emerald_fragment"
         }
       ],
       "conditions": [
@@ -24,7 +24,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:emerald",
+          "name": "growable_crystals:emerald_fragment",
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -52,7 +52,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:emerald",
+          "name": "growable_crystals:emerald_fragment",
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -80,7 +80,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:emerald",
+          "name": "growable_crystals:emerald_fragment",
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -108,13 +108,13 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:emerald",
+          "name": "growable_crystals:emerald_fragment",
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 4.0,
+                "min": 3.0,
                 "max": 5.0
               }
             }

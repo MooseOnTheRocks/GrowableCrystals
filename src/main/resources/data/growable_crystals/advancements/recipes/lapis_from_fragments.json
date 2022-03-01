@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "growable_crystals:lapis_from_fragments"
+    ]
+  },
+  "criteria": {
+    "has_lapis_fragment": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "growable_crystals:lapis_fragment"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "growable_crystals:lapis_from_fragments"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_lapis_fragment",
+      "has_the_recipe"
+    ]
+  ]
+}

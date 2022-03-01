@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:flint" },
+    { "item": "minecraft:amethyst_shard" },
+    { "item": "minecraft:bowl" }
+  ],
+  "result": {
+    "item": "growable_crystals:crystal_powder"
+  }
+}

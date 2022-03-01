@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "growable_crystals:raw_copper_nugget" },
+    { "item": "growable_crystals:raw_copper_nugget" },
+    { "item": "growable_crystals:raw_copper_nugget" },
+    { "item": "growable_crystals:raw_copper_nugget" }
+  ],
+  "result": {
+    "item": "minecraft:raw_copper"
+  }
+}

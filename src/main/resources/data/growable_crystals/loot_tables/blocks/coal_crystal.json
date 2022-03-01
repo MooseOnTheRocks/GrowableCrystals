@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:coal"
+          "name": "growable_crystals:coal_fragment"
         }
       ],
       "conditions": [
@@ -24,7 +24,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:coal",
+          "name": "growable_crystals:coal_fragment",
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -52,7 +52,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:coal",
+          "name": "growable_crystals:coal_fragment",
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -80,14 +80,14 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:coal",
+          "name": "growable_crystals:coal_fragment",
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 3.0,
-                "max": 4.0
+                "min": 4.0,
+                "max": 5.0
               }
             }
           ]
@@ -108,14 +108,14 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:coal",
+          "name": "growable_crystals:coal_fragment",
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "min": 6.0,
-                "max": 8.0
+                "min": 7.0,
+                "max": 9.0
               }
             }
           ]
