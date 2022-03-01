@@ -1,0 +1,6 @@
+{
+  "parent": "growable_crystals:block/base_crystal",
+  "textures": {
+    "cross": "growable_crystals:block/coal_crystal_stage_4"
+  }
+}

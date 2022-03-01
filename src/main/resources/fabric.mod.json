@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "crystal_growing",
+  "id": "growable_crystals",
   "version": "${version}",
 
-  "name": "Crystal Growing",
+  "name": "Growable Crystals",
   "description": "Growable crystals in Minecraft!",
   "authors": [
     "MooseOnTheRocks"
@@ -14,19 +14,19 @@
   },
 
   "license": "MIT",
-  "icon": "assets/crystal_growing/icon.png",
+  "icon": "assets/growable_crystals/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "dev.foltz.crystalgrowing.CrystalGrowingMod"
+      "dev.foltz.growablecrystals.GrowableCrystalsMod"
     ],
     "client": [
-      "dev.foltz.crystalgrowing.client.CrystalGrowingModClient"
+      "dev.foltz.growablecrystals.client.GrowableCrystalsModClient"
     ]
   },
   "mixins": [
-    "crystal_growing.mixins.json"
+    "growable_crystals.mixins.json"
   ],
 
   "depends": {

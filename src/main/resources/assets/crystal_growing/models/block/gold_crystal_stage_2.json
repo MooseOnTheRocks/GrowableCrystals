@@ -1,6 +1,0 @@
-{
-  "parent": "crystal_growing:block/base_crystal",
-  "textures": {
-    "cross": "crystal_growing:block/gold_crystal_stage_2"
-  }
-}
