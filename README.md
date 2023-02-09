@@ -1,4 +1,4 @@
-# Crystal Growing (WIP)
+# Growable Crystals
 Minecraft mod that adds growable crystals for the different ore types.
 Currently in the very early stages of development.
 
